@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import web3, { loadWeb3 } from './web3';
 import Web3Context from './context/web3Context';
-import Layout from './components/Layout';
+// import Layout from './components/Layout';
 import CampaignList from './components/CampaignList';
 import CreateCampaign from './components/CreateCampaign';
 import NotFound from './components/NotFound';
 import CampaignDetails from './components/CampaignDetails';
+import Container from 'react-bootstrap/Container';
+import NavBar from './components/NavBar';
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -33,7 +35,8 @@ const App = () => {
 
   return (
     <Web3Context.Provider value={web3User}>
-      <Layout>
+      <NavBar />
+      <Container>
         <Switch>
           <Route path='/campaigns/new' component={CreateCampaign} />
           <Route path='/campaigns/:address' component={CampaignDetails} />
@@ -41,7 +44,7 @@ const App = () => {
           <Redirect from='/' exact to='/campaigns' />
           <Route path='*' component={NotFound} />
         </Switch>
-      </Layout>
+      </Container>
     </Web3Context.Provider>
   );
 };
