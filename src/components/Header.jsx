@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import { useContext } from 'react';
 import Web3Context from '../context/web3Context';
 
-const NavBar = () => {
+const Header = () => {
   const web3 = useContext(Web3Context);
 
   return (
@@ -53,4 +53,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Header;
