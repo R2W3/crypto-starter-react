@@ -8,7 +8,7 @@ import CreateCampaign from './components/CreateCampaign';
 import NotFound from './components/NotFound';
 import CampaignDetails from './components/CampaignDetails';
 import Container from 'react-bootstrap/Container';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <Web3Context.Provider value={web3User}>
-      <NavBar />
+      {/* <NavBar /> */}
       <Container>
         <Switch>
           <Route path='/campaigns/new' component={CreateCampaign} />
