@@ -1,73 +1,56 @@
-import { useContext, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import { useContext } from 'react';
 import Web3Context from '../context/web3Context';
 
-const Navbar = () => {
-  const [account, setAccount] = useState(null);
-  const [balance, setBalance] = useState(null);
-  const [network, setNetwork] = useState(null);
-
+const NavBar = () => {
   const web3 = useContext(Web3Context);
 
-  const loadWeb3 = async web3 => {
-    const accounts = await web3.eth.getAccounts();
-    const account = await accounts[0];
-    const etherBalance = await web3.eth.getBalance(account);
-    let network = await web3.eth.net.getNetworkType();
-    network = network.charAt(0).toUpperCase() + network.slice(1);
-
-    setNetwork(network);
-    setBalance((etherBalance / 10 ** 18).toFixed(5));
-    setAccount(account);
-  };
-
-  useEffect(() => {
-    if (window.ethereum && web3 !== null) {
-      loadWeb3(web3);
-
-      window.ethereum.on('accountsChanged', () => {
-        loadWeb3(web3);
-      });
-
-      window.ethereum.on('chainChanged', () => {
-        loadWeb3(web3);
-      });
-    } else {
-      return null;
-    }
-  }, [web3]);
-
   return (
-    <nav className='navbar sticky-top navbar-expand-lg navbar-dark bg-primary'>
-      <div className='container-sm justify-content-center justify-content-sm-between'>
-        <a
-          className='navbar-brand'
+    <Navbar sticky='top' bg='light' expand='lg'>
+      <Container fluid='xl'>
+        <Navbar.Brand
           href='https://jamieanderson.eth.link'
           target='_blank'
           rel='noopener noreferrer'
         >
           CryptoStarter
-        </a>
-
-        <ul className='navbar-nav ml-auto d-none d-sm-block'>
-          <li className='nav-item'>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav>
+            <NavLink className='nav-item nav-link' to='/campaigns'>
+              Campaigns
+            </NavLink>
+            <NavLink className='nav-item nav-link' to='/campaigns/new'>
+              Create Campaign
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className='justify-content-end d-none d-lg-block'>
+          <Nav>
             <a
               className='nav-link small'
-              href={`https://rinkeby.etherscan.io/address/${account}`}
+              href={`https://rinkeby.etherscan.io/address/${web3.account}`}
               target='_blank'
               rel='noopener noreferrer'
             >
-              {account &&
-                account.substring(0, 6) + '...' + account.substring(38, 42)}
+              {web3.account &&
+                web3.account.substring(0, 6) +
+                  '...' +
+                  web3.account.substring(38, 42)}
               &nbsp;&nbsp;&nbsp;
-              {account && balance}
+              {web3.account && web3.balance}
               &nbsp;&nbsp;&nbsp;
-              {account && network}
+              {web3.account && web3.network}
             </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default NavBar;

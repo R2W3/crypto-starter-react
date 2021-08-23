@@ -14,4 +14,16 @@ if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
   web3 = new Web3(provider);
 }
 
+export const loadWeb3 = async (web3, setNetwork, setBalance, setAccount) => {
+  const accounts = await web3.eth.getAccounts();
+  const account = await accounts[0];
+  const etherBalance = await web3.eth.getBalance(account);
+  let network = await web3.eth.net.getNetworkType();
+  network = network.charAt(0).toUpperCase() + network.slice(1);
+
+  setNetwork(network);
+  setBalance((etherBalance / 10 ** 18).toFixed(5));
+  setAccount(account);
+};
+
 export default web3;

@@ -1,13 +1,11 @@
-import web3 from '../web3';
-import Web3Context from '../context/web3Context';
-import Navbar from './Navbar';
+import NavBar from './NavBar';
 
 const Layout = ({ children }) => {
   return (
-    <Web3Context.Provider value={web3}>
-      <Navbar />
+    <>
+      <NavBar />
       <div className='container'>{children}</div>
-    </Web3Context.Provider>
+    </>
   );
 };
 
