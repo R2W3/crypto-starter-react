@@ -11,15 +11,27 @@ contract Campaign {
     uint256 approvalCount;
   }
 
+  struct Image {
+    uint256 id;
+    string hash;
+    string description;
+  }
+
+  event ImageCreated(uint256 id, string hash, string description);
+
   Request[] public requests;
   address public manager;
   uint256 public minimumContribution;
   string public description;
   uint256 public approversCount;
+  uint256 public imageCount = 0;
   mapping(address => bool) public approvers;
   mapping(address => bool) public approvals;
+  mapping(uint256 => Image) public images;
+  mapping(address => bool) public cancelledCampaigns;
 
   modifier restricted() {
+    require(msg.sender != address(0x0));
     require(msg.sender == manager);
     _;
   }
@@ -29,6 +41,7 @@ contract Campaign {
     uint256 _minimum,
     address creator
   ) {
+    require(msg.sender != address(0x0));
     manager = creator;
     minimumContribution = _minimum;
     description = _description;
@@ -45,6 +58,8 @@ contract Campaign {
     uint256 _value,
     address _recipient
   ) public restricted {
+    require(bytes(_description).length > 0);
+
     Request memory newRequest = Request({
       description: _description,
       value: _value,
@@ -95,5 +110,21 @@ contract Campaign {
 
   function getRequestsCount() public view returns (uint256) {
     return requests.length;
+  }
+
+  function uploadImage(string memory _imgHash, string memory _description)
+    public
+    restricted
+  {
+    require(bytes(_imgHash).length > 0);
+    require(bytes(_description).length > 0);
+
+    imageCount++;
+    images[imageCount] = Image(imageCount, _imgHash, _description);
+    emit ImageCreated(imageCount, _imgHash, _description);
+  }
+
+  function cancelCampaign(address _campaign) public restricted {
+    cancelledCampaigns[_campaign] = true;
   }
 }

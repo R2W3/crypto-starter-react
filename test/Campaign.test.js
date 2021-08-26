@@ -1,5 +1,6 @@
 const CampaignFactory = artifacts.require('../contracts/CampaignFactory');
 const Campaign = artifacts.require('../contracts/Campaign');
+const { isAccessor } = require('typescript');
 const Web3 = require('web3');
 
 contract('CampaignFactory', ([deployer, user1]) => {
@@ -32,6 +33,15 @@ contract('CampaignFactory', ([deployer, user1]) => {
       await campaign.contribute({ value: '200', from: user1 });
       const isContributor = await campaign.approvers(user1);
       assert(isContributor);
+    });
+
+    it('requires a description', async () => {
+      try {
+        await factory.createCampaign('', '100');
+        assert(false);
+      } catch (error) {
+        assert(error);
+      }
     });
 
     it('requires a minimum contribution', async () => {
@@ -70,6 +80,78 @@ contract('CampaignFactory', ([deployer, user1]) => {
       balance = Web3.utils.fromWei(balance, 'ether');
       balance = parseFloat(balance);
       assert(balance > 104);
+    });
+
+    it('cancels a campaign', async () => {
+      let cancelledCampaign;
+      await campaign.cancelCampaign(campaignAddress, { from: deployer });
+      cancelledCampaign = await campaign.cancelledCampaigns(campaignAddress);
+      assert(cancelledCampaign);
+    });
+
+    it('manager can only cancel a campaign', async () => {
+      try {
+        await campaign.cancelCampaign(campaignAddress, { from: user1 });
+        assert(false);
+      } catch (error) {
+        assert(error);
+      }
+    });
+  });
+
+  describe('images', () => {
+    let result;
+    let imageCount;
+    const hash = 'abc123';
+    const description = 'image description';
+
+    beforeEach(async () => {
+      result = await campaign.uploadImage(hash, description, {
+        from: deployer,
+      });
+      imageCount = await campaign.imageCount();
+    });
+
+    it('creates images', async () => {
+      assert.equal(imageCount, 1);
+      const event = result.logs[0].args;
+      assert.equal(event.id.toNumber(), imageCount.toNumber(), 'id is correct');
+      assert.equal(event.hash, hash, 'hash is correct');
+      assert.equal(event.description, description, 'description is correct');
+    });
+
+    it('requires a image has a hash', async () => {
+      try {
+        await campaign.uploadImage('', description, { from: deployer });
+        assert(false);
+      } catch (error) {
+        assert(error);
+      }
+    });
+
+    it('requires a image has a description', async () => {
+      try {
+        await campaign.uploadImage(hash, '', { from: deployer });
+        assert(false);
+      } catch (error) {
+        assert(error);
+      }
+    });
+
+    it('requires a image can only be uploaded by the manager', async () => {
+      try {
+        await campaign.uploadImage(hash, description, { from: user1 });
+        assert(false);
+      } catch (error) {
+        assert(error);
+      }
+    });
+
+    it('lists images', async () => {
+      const image = await campaign.images(imageCount);
+      assert.equal(image.id.toNumber(), imageCount.toNumber(), 'id is correct');
+      assert.equal(image.hash, hash, 'hash is correct');
+      assert.equal(image.description, description, 'description is correct');
     });
   });
 });

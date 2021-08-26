@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import web3, { loadWeb3 } from './web3';
 import Web3Context from './context/web3Context';
-// import Layout from './components/Layout';
 import CampaignList from './components/CampaignList';
 import CreateCampaign from './components/CreateCampaign';
 import NotFound from './components/NotFound';
