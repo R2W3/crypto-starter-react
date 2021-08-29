@@ -28,6 +28,7 @@ export const loadCampaign = async (address, setSummary) => {
   const campaign = Campaign(address);
   const summaryData = await campaign.methods.getSummary().call();
   const descriptionData = await campaign.methods.description().call();
+  const imagesCount = await campaign.methods.imageCount().call();
 
   const data = {
     address,
@@ -37,7 +38,26 @@ export const loadCampaign = async (address, setSummary) => {
     requestsCount: summaryData[2],
     approversCount: summaryData[3],
     manager: summaryData[4],
+    imagesCount,
   };
 
   setSummary(data);
+};
+
+export const loadImages = async (address, setImages) => {
+  let result = [];
+
+  const campaign = Campaign(address);
+  const imagesCount = await campaign.methods.imageCount().call();
+
+  for (let i = 1; i <= imagesCount; i++) {
+    const imageData = { hash: '', description: '' };
+    const image = await campaign.methods.images(i).call();
+
+    imageData.hash = image.hash;
+    imageData.description = image.description;
+
+    result.push(imageData);
+  }
+  setImages(result);
 };

@@ -24,7 +24,12 @@ const Header = () => {
             <NavLink className='nav-item nav-link' to='/campaigns'>
               Campaigns
             </NavLink>
-            <NavLink className='nav-item nav-link' to='/campaigns/new'>
+            <NavLink
+              className={`nav-item nav-link ${
+                web3.network !== 'Rinkeby' ? 'd-none' : ''
+              }`}
+              to='/campaigns/new'
+            >
               Create Campaign
             </NavLink>
           </Nav>
