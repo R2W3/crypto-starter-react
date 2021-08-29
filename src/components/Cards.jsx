@@ -68,7 +68,7 @@ const Cards = () => {
             </Card>
           </Col>
           <Col xlg={8}>
-            <Card className='text-md-center'>
+            <Card className='text-md-center mb-3'>
               <Card.Header>Campaign Balance (ether)</Card.Header>
               <Card.Body>
                 <h6 className='card-subtitle mb-2 text-muted'>

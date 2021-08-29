@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import CampaignDetails from './components/CampaignDetails';
 import Container from 'react-bootstrap/Container';
 import Header from './components/Header';
+import Requests from './components/Requests';
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -35,9 +36,10 @@ const App = () => {
   return (
     <Web3Context.Provider value={web3User}>
       <Header />
-      <Container>
+      <Container fluid={'sm'}>
         <Switch>
           <Route path='/campaigns/new' component={CreateCampaign} />
+          <Route path='/campaigns/:address/requests' component={Requests} />
           <Route path='/campaigns/:address' component={CampaignDetails} />
           <Route path='/campaigns' component={CampaignList} />
           <Redirect from='/' exact to='/campaigns' />
