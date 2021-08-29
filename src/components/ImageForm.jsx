@@ -76,9 +76,11 @@ const ImageForm = ({ address }) => {
 
   return (
     <>
-      <h4 className='headingText text-center text-lg-start'>Upload Image</h4>
       <Row className='justify-content-center'>
         <Col>
+          <h4 className='headingText text-center text-lg-start'>
+            Upload Image
+          </h4>
           <Form onSubmit={onSubmit}>
             <Form.Group className='mb-3' id='description'>
               <Form.Control

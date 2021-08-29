@@ -51,9 +51,13 @@ const CampaignDetails = () => {
               View Requests
             </button>
           </Link>
-          {web3.network === 'Rinkeby' && images.length < 4 && (
-            <ImageForm address={address} />
-          )}
+          <Row className={images.length ? '' : 'justify-content-center'}>
+            <Col md={images.length ? 12 : 8} className=''>
+              {web3.network === 'Rinkeby' && images.length < 4 && (
+                <ImageForm address={address} />
+              )}
+            </Col>
+          </Row>
         </Col>
         {images.length !== 0 && (
           <Col lg={5}>
