@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import CampaignContext from '../context/campaignContext';
+import web3 from '../web3';
 import SkeletonCard from '../skeletons/SkeletonCard';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -72,7 +73,7 @@ const Cards = () => {
               <Card.Header>Campaign Balance (ether)</Card.Header>
               <Card.Body>
                 <h6 className='card-subtitle mb-2 text-muted'>
-                  {campaign.balance}
+                  {web3.utils.fromWei(campaign.balance, 'ether')}
                 </h6>
                 <Card.Text>
                   The balance is how much money this campaign has left to spend.

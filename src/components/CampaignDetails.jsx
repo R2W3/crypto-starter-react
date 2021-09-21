@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import CampaignContext from '../context/campaignContext';
 import { loadCampaign, loadImages } from '../loadCampaignData';
 import Cards from './Cards';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Images from './Images';
 import ImageForm from './ImageForm';
+import ContributeForm from './ContributeForm';
 import SkeletonCard from '../skeletons/SkeletonCard';
 import { useContext } from 'react';
 import Web3Context from '../context/web3Context';
+import { Row, Col } from 'react-bootstrap';
 
 const CampaignDetails = () => {
   const [summary, setSummary] = useState(null);
@@ -51,16 +51,22 @@ const CampaignDetails = () => {
               View Requests
             </button>
           </Link>
-          <Row className={images.length ? '' : 'justify-content-center'}>
-            <Col md={images.length ? 12 : 8} className=''>
+          <Row>
+            <Col md={images.length ? 12 : 6}>
               {web3.network === 'Rinkeby' && images.length < 4 && (
                 <ImageForm address={address} />
               )}
+            </Col>
+            <Col md={6} className='mt-3'>
+              {images.length === 0 && <ContributeForm address={address} />}
             </Col>
           </Row>
         </Col>
         {images.length !== 0 && (
           <Col lg={5}>
+            <div className='text-center'>
+              <ContributeForm address={address} />
+            </div>
             {images && summary ? <Images images={images} /> : renderSkeletons()}
           </Col>
         )}

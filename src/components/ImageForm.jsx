@@ -76,13 +76,11 @@ const ImageForm = ({ address }) => {
 
   return (
     <>
-      <Row className='justify-content-center'>
+      <Row className='justify-content-center mt-3'>
         <Col>
-          <h4 className='headingText text-center text-lg-start'>
-            Upload Image
-          </h4>
           <Form onSubmit={onSubmit}>
             <Form.Group className='mb-3' id='description'>
+              <Form.Label>Upload Image</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Enter description here... and add up to 4 images'
