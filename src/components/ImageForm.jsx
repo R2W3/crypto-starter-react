@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import web3 from '../web3';
 import Campaign from '../campaign';
 import { create } from 'ipfs-http-client';
@@ -11,6 +12,8 @@ const ImageForm = ({ address }) => {
   const [imageHash, setImageHash] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
 
   const captureImage = async event => {
     event.preventDefault();
@@ -40,6 +43,9 @@ const ImageForm = ({ address }) => {
       await campaign.methods
         .uploadImage(imageHash, description)
         .send({ from: accounts[0] });
+
+      setDescription('');
+      history.push(`/campaigns/${address}`);
     } catch (error) {
       setErrorMessage(error.message);
     }
