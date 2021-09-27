@@ -9,6 +9,7 @@ import CampaignDetails from './components/CampaignDetails';
 import Container from 'react-bootstrap/Container';
 import Header from './components/Header';
 import Requests from './components/Requests';
+import NewRequest from './components/NewRequest';
 
 const App = () => {
   const [account, setAccount] = useState(null);
@@ -39,6 +40,10 @@ const App = () => {
       <Container fluid={'sm'}>
         <Switch>
           <Route path='/campaigns/new' component={CreateCampaign} />
+          <Route
+            path='/campaigns/:address/requests/new'
+            component={NewRequest}
+          />
           <Route path='/campaigns/:address/requests' component={Requests} />
           <Route path='/campaigns/:address' component={CampaignDetails} />
           <Route path='/campaigns' component={CampaignList} />
