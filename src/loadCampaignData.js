@@ -61,3 +61,17 @@ export const loadImages = async (address, setImages) => {
   }
   setImages(result);
 };
+
+export const loadRequests = async (address, setRequests) => {
+  let result = [];
+
+  const campaign = Campaign(address);
+  const summaryData = await campaign.methods.getSummary().call();
+
+  for (let i = 0; i < summaryData[2]; i++) {
+    const requests = await campaign.methods.requests(i).call();
+    result.push(requests);
+  }
+
+  setRequests(result);
+};

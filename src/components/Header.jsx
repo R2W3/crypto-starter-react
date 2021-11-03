@@ -12,7 +12,7 @@ const Header = () => {
     <Navbar sticky='top' bg='light' expand='lg'>
       <Container fluid='xl'>
         <Navbar.Brand
-          href='https://jamieanderson.eth.link'
+          href='https://cryptnology.dev/'
           target='_blank'
           rel='noopener noreferrer'
         >
