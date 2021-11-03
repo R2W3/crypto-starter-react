@@ -9,11 +9,17 @@ const Images = ({ images }) => {
         images.map((image, index) => (
           <Col key={index}>
             <Card>
-              <Card.Img
-                variant='top'
-                style={{ height: '15rem' }}
-                src={`https://ipfs.infura.io/ipfs/${image.hash}`}
-              />
+              <a
+                href={`https://ipfs.infura.io/ipfs/${image.hash}`}
+                target='_blank'
+                rel='noreferrer'
+              >
+                <Card.Img
+                  variant='top'
+                  style={{ height: '15rem' }}
+                  src={`https://ipfs.infura.io/ipfs/${image.hash}`}
+                />
+              </a>
               <Card.Body>
                 <Card.Text>{image.description}</Card.Text>
               </Card.Body>
