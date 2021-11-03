@@ -1,4 +1,5 @@
 import web3 from '../web3';
+import { useHistory } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -13,6 +14,8 @@ const ContributeForm = ({ address }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const history = useHistory();
+
   const onSubmit = async event => {
     event.preventDefault();
 
@@ -26,6 +29,7 @@ const ContributeForm = ({ address }) => {
         from: accounts[0],
         value: web3.utils.toWei(contribution, 'ether'),
       });
+      history.push(`/campaigns/${address}`);
     } catch (error) {
       setErrorMessage(error.message);
     }
