@@ -89,7 +89,7 @@ const ImageForm = ({ address }) => {
               <Form.Label>Upload Image</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter description here... and add up to 4 images'
+                placeholder='Enter description here... and add up to 4 images to IPFS'
                 value={description}
                 required
                 onChange={event => setDescription(event.target.value)}
