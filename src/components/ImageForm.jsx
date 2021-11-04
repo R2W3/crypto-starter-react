@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import web3 from '../web3';
 import Campaign from '../campaign';
 import { create } from 'ipfs-http-client';
 import { Form, Button, Alert, Row, Col } from 'react-bootstrap';
+import Web3Context from '../context/web3Context';
 
 const ipfs = create('https://ipfs.infura.io:5001/api/v0');
 
-const ImageForm = ({ address }) => {
+const ImageForm = ({ address, summary }) => {
   const [description, setDescription] = useState('');
   const [imageHash, setImageHash] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
+
+  const web3Account = useContext(Web3Context);
 
   const captureImage = async event => {
     event.preventDefault();
@@ -53,6 +56,10 @@ const ImageForm = ({ address }) => {
     setLoading(false);
   };
 
+  const contribute = () => {
+    if (summary) return summary.manager === web3Account.account ? false : true;
+  };
+
   const renderButton = () => {
     return (
       <div className='text-center'>
@@ -67,7 +74,12 @@ const ImageForm = ({ address }) => {
           </Button>
         ) : (
           <div>
-            <Button variant='outline-primary' type='submit' className='mb-3'>
+            <Button
+              variant='outline-primary'
+              type='submit'
+              className='mb-3'
+              disabled={contribute()}
+            >
               Upload
             </Button>
           </div>

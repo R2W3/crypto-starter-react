@@ -91,7 +91,6 @@ contract Campaign {
 
     for (uint256 i = 0; i < approvalAddresses.length; i++) {
       approvals[approvalAddresses[i]] = false;
-      // delete approvalAddresses[i];
     }
   }
 

@@ -39,16 +39,35 @@ const Requests = () => {
     }
   };
 
+  const disableLinks = () => {
+    return summary.manager !== web3.account ? 'none' : '';
+  };
+
+  const renderRequestButton = () => {
+    if (summary) {
+      return (
+        <Link
+          to={`/campaigns/${address}/requests/new/`}
+          style={{ pointerEvents: disableLinks() }}
+        >
+          <Button
+            variant='outline-primary'
+            style={{ marginRight: 10 }}
+            disabled={summary.manager !== web3.account}
+          >
+            Add Request
+          </Button>
+        </Link>
+      );
+    } else return null;
+  };
+
   return (
     <div>
       <h3 className='headingText text-center text-lg-start'>Requests</h3>
       <Row className='text-center'>
         <Col>
-          <Link to={`/campaigns/${address}/requests/new/`}>
-            <Button variant='outline-primary' style={{ marginRight: 10 }}>
-              Add Request
-            </Button>
-          </Link>
+          {renderRequestButton()}
           <Link to={`/campaigns/${address}/`}>
             <Button variant='danger'>Back</Button>
           </Link>

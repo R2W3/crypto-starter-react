@@ -54,20 +54,26 @@ const CampaignDetails = () => {
           <Row>
             <Col md={images.length ? 12 : 6}>
               {web3.network === 'Rinkeby' && images.length < 4 && (
-                <ImageForm address={address} />
+                <ImageForm address={address} summary={summary} />
               )}
             </Col>
             <Col md={6} className='mt-3'>
-              {images.length === 0 && <ContributeForm address={address} />}
+              {images.length === 0 && (
+                <ContributeForm address={address} summary={summary} />
+              )}
             </Col>
           </Row>
         </Col>
         {images.length !== 0 && (
           <Col lg={5}>
             <div className='text-center'>
-              <ContributeForm address={address} />
+              <ContributeForm address={address} summary={summary} />
             </div>
-            {images && summary ? <Images images={images} /> : renderSkeletons()}
+            {images && summary ? (
+              <Images images={images} summary={summary} />
+            ) : (
+              renderSkeletons()
+            )}
           </Col>
         )}
       </Row>

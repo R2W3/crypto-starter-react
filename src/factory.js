@@ -5,7 +5,7 @@ const instance = networkId => {
   return new web3.eth.Contract(
     CampaignFactory.abi,
     networkId !== '4'
-      ? '0xBE3f91172B1000E2DA4A97BeaF3940BD9FCA6Cf6'
+      ? '0x571da9d488DBD0754396AFdf4d3FE2E1C15c6C6A'
       : CampaignFactory.networks[networkId].address
   );
 };

@@ -34,6 +34,13 @@ const App = () => {
     }
   }, []);
 
+  if (network !== 'Rinkeby')
+    return (
+      <h2 style={{ textAlign: 'center', marginTop: '400px' }}>
+        Please connect to the Rinkeby Test Network
+      </h2>
+    );
+
   return (
     <Web3Context.Provider value={web3User}>
       <Header />
