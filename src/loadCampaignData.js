@@ -75,3 +75,10 @@ export const loadRequests = async (address, setRequests) => {
 
   setRequests(result);
 };
+
+export const loadApproval = async (address, account, setApproval) => {
+  const campaign = Campaign(address);
+  const approved = await campaign.methods.approvals(account).call();
+
+  setApproval(approved);
+};
