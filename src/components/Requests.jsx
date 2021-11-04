@@ -1,20 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router';
+import Web3Context from '../context/web3Context';
 import { Link } from 'react-router-dom';
 import { Table, Button, Col, Row } from 'react-bootstrap';
-import { loadCampaign, loadRequests } from '../loadCampaignData';
+import { loadCampaign, loadRequests, loadApproval } from '../loadCampaignData';
 import RequestRow from './RequestRow';
 
 const Requests = () => {
   const [summary, setSummary] = useState(null);
   const [requests, setRequests] = useState(null);
+  const [approval, setApproval] = useState(false);
 
   const { address } = useParams();
+  const web3 = useContext(Web3Context);
 
   useEffect(() => {
     loadCampaign(address, setSummary);
     loadRequests(address, setRequests);
-  }, [address, setSummary]);
+    loadApproval(address, web3.account, setApproval);
+  }, [address, web3.account, setSummary, requests]);
 
   const renderRows = () => {
     if (requests && summary) {
@@ -26,6 +30,9 @@ const Requests = () => {
             request={request}
             address={address}
             approversCount={summary.approversCount}
+            approved={approval}
+            manager={summary.manager}
+            account={web3.account}
           />
         );
       });

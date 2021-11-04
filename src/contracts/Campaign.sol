@@ -20,11 +20,12 @@ contract Campaign {
   event ImageCreated(uint256 id, string hash, string description);
 
   Request[] public requests;
+  address[] approvalAddresses;
   address public manager;
   uint256 public minimumContribution;
-  string public description;
   uint256 public approversCount;
   uint256 public imageCount = 0;
+  string public description;
   mapping(address => bool) public approvers;
   mapping(address => bool) public approvals;
   mapping(uint256 => Image) public images;
@@ -49,6 +50,7 @@ contract Campaign {
 
   function contribute() public payable {
     require(msg.value > minimumContribution);
+    approvalAddresses.push(msg.sender);
     approvers[msg.sender] = true;
     approversCount++;
   }
@@ -86,6 +88,11 @@ contract Campaign {
 
     payable(request.recipient).transfer(request.value);
     request.complete = true;
+
+    for (uint256 i = 0; i < approvalAddresses.length; i++) {
+      approvals[approvalAddresses[i]] = false;
+      // delete approvalAddresses[i];
+    }
   }
 
   function getSummary()
