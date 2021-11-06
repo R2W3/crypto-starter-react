@@ -111,7 +111,7 @@ const ImageForm = ({ address, summary }) => {
             <Form.Group controlId='formFile' className='mb-3'>
               <Form.Control
                 type='file'
-                accept='.jpg, jpeg, png, gif, bmp'
+                accept='.jpg, jpeg, png, gif, bmp, png'
                 required
                 onChange={captureImage}
               />

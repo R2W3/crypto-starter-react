@@ -31,13 +31,13 @@ const Cards = () => {
               </Card.Body>
             </Card>
             <Card className='my-3'>
-              <Card.Header>Minimum Contribution</Card.Header>
+              <Card.Header>Minimum Contribution (ether)</Card.Header>
               <Card.Body>
                 <h6 className='card-subtitle mb-2 text-muted'>
-                  {campaign.minimumContribution}
+                  {web3.utils.fromWei(campaign.minimumContribution, 'ether')}
                 </h6>
                 <Card.Text>
-                  You must contribute at least this much wei to become an
+                  You must contribute at least this much ether to become an
                   approver.
                 </Card.Text>
               </Card.Body>

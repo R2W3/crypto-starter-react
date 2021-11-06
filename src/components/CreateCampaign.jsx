@@ -28,7 +28,10 @@ const CreateCampaign = () => {
       const factory = Factory(networkId);
       const accounts = await web3.eth.getAccounts();
       await factory.methods
-        .createCampaign(description, minimumContribution)
+        .createCampaign(
+          description,
+          web3.utils.toWei(minimumContribution, 'ether')
+        )
         .send({ from: accounts[0] });
 
       history.push('/');
@@ -93,11 +96,11 @@ const CreateCampaign = () => {
               <InputGroup>
                 <Form.Control
                   type='number'
-                  placeholder='eg. 100000'
+                  placeholder='eg. 0.001'
                   value={minimumContribution}
                   onChange={event => setMinimumContribution(event.target.value)}
                 />
-                <InputGroup.Text>wei</InputGroup.Text>
+                <InputGroup.Text>ether</InputGroup.Text>
               </InputGroup>
             </Form.Group>
             {renderErrorMessage()}
