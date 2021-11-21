@@ -10,7 +10,11 @@ Please make sure you first have the [MetaMask](https://metamask.io/) browser ext
 
 ## Usage
 
-Please visit [CryptoStarter](https://vdzz7-liaaa-aaaad-qao7q-cai.ic.fleek.co/) and have your MetaMask wallet connected to the Rinkeby test network.
+Please visit [CryptoStarter](https://vdzz7-liaaa-aaaad-qao7q-cai.ic.fleek.co/) and have your MetaMask wallet connected to the Rinkeby test network. You can create your own campaign or contribute to an existing one. By contributing to a campaign you are automatically allocated as an approver of any funds the owner of the campaign wishes to withdraw for their project. To gain this approval at least 50% of the approvers approval is required.
+
+Make sure you are on the Rinkeby test network and have ETH in your MetaMask wallet. If you need ETH you can visit the [Rinkeby Authenticated Faucet](https://faucet.rinkeby.io/).
+
+Please enjoy the DApp.
 
 ## Smart Contract Address
 
