@@ -2,6 +2,9 @@
 
 A DApp to showcase my developer skills on the Ethereum blockchain ecosystem. A redesign of the crowdfunding platform 'Kickstarter' on the Rinkeby test network. The DApp has the features of creating a campaign where people can then fund this campaign with ETH. The campaign is completely controlled with a smart contract and the creator can only receive funds after contributors have approved a request.
 
+## Demo
+A quick video of me demonstrating the functionality of the [CryptoStarter](https://youtu.be/uegTqVCsoP4) DApp.
+
 ![CryptoStarter](/public/crypto_starter.png 'CryptoStarter')
 
 ## Installation
