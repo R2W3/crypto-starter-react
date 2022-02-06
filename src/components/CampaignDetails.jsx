@@ -30,7 +30,7 @@ const CampaignDetails = () => {
 
   return (
     <CampaignContext.Provider value={summary}>
-      <h3 className='headingText text-center text-lg-start'>Show Campaign</h3>
+      <h3 className='headingText text-center text-lg-center'>Campaign Details</h3>
       <Row className='text-center'>
         <Col className='mb-4 d-lg-none'>
           <Link to={`/campaigns/${address}/requests`}>

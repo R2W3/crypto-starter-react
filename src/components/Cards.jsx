@@ -17,7 +17,8 @@ const Cards = () => {
     <Row>
       {campaign ? (
         <>
-          <Col md={6} mb={3}>
+          <Col md={6} mb={3} style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            
             <Card>
               <Card.Header>{campaign.description}</Card.Header>
               <Card.Body>
@@ -25,20 +26,19 @@ const Cards = () => {
                   {campaign.manager}
                 </h6>
                 <Card.Text>
-                  The manager created this campaign and can create requests to
-                  withdraw money.
+                  Above address is the campaign initiator.
                 </Card.Text>
               </Card.Body>
             </Card>
+
             <Card className='my-3'>
-              <Card.Header>Minimum Contribution (ether)</Card.Header>
+              <Card.Header>Minimum Contribution (Matic)</Card.Header>
               <Card.Body>
                 <h6 className='card-subtitle mb-2 text-muted'>
                   {web3.utils.fromWei(campaign.minimumContribution, 'ether')}
                 </h6>
                 <Card.Text>
-                  You must contribute at least this much ether to become an
-                  approver.
+                  Minimum contribution set by campaign initiator.
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -51,8 +51,7 @@ const Cards = () => {
                   {campaign.requestsCount}
                 </h6>
                 <Card.Text>
-                  A request tries to withdraw money from the contract. Requests
-                  must be approved by approvers.
+                  Number of withdrawl requests. Must be approved.
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -63,7 +62,7 @@ const Cards = () => {
                   {campaign.approversCount}
                 </h6>
                 <Card.Text>
-                  Number of people who have alreadly donated to this campaign.
+                  Number of people who have donated to this campaign.
                 </Card.Text>
               </Card.Body>
             </Card>

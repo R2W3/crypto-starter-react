@@ -74,17 +74,17 @@ const CreateCampaign = () => {
 
   return (
     <>
-      <h3 className='headingText text-center text-lg-start'>
-        Create a Campaign
+      <h3 className='headingText text-center text-lg-center'>
+        Start New Campaign
       </h3>
       <Row className='justify-content-center'>
         <Col lg={7}>
           <Form onSubmit={onSubmit}>
             <Form.Group className='mb-3' id='description'>
-              <Form.Label>Description</Form.Label>
+              <Form.Label>Enter Campaign Description:</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='eg. I want to create......'
+                placeholder='e.g. I want to raise funds for. . .'
                 required
                 value={description}
                 onChange={event => setDescription(event.target.value)}
@@ -92,15 +92,15 @@ const CreateCampaign = () => {
             </Form.Group>
 
             <Form.Group className='mb-4' id='minimumContribution'>
-              <Form.Label>Minimum Contribution</Form.Label>
+              <Form.Label>Set Minimum Contribution:</Form.Label>
               <InputGroup>
                 <Form.Control
                   type='number'
-                  placeholder='eg. 0.001'
+                  placeholder='e.g. 0.001'
                   value={minimumContribution}
                   onChange={event => setMinimumContribution(event.target.value)}
                 />
-                <InputGroup.Text>ether</InputGroup.Text>
+                <InputGroup.Text>Matic</InputGroup.Text>
               </InputGroup>
             </Form.Group>
             {renderErrorMessage()}

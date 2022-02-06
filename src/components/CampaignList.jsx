@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SkeletonCard from '../skeletons/SkeletonCard';
+//import { auto } from '@popperjs/core';
 
 const CampaignList = () => {
   const [campaigns, setCampaigns] = useState(null);
@@ -22,17 +23,18 @@ const CampaignList = () => {
       return (
         <Card
           key={campaign.address}
-          style={{ marginBottom: '20px' }}
+          style={{ marginBottom: '30px'  }}
           className='text-center'
-        >
+        > 
           <Card.Header>{campaign.address}</Card.Header>
           <Card.Body>
             <h6>{campaign.description}</h6>
             <Card.Text>
-              <Link to={`/campaigns/${campaign.address}`}>View Campaign</Link>
+              <Link to={`/campaigns/${campaign.address}`}>View Campaign Details</Link>
             </Card.Text>
           </Card.Body>
         </Card>
+
       );
     });
   };
@@ -43,7 +45,7 @@ const CampaignList = () => {
 
   return (
     <>
-      <h3 className='headingText text-center text-md-start'>Open Campaigns</h3>
+      <h3 className='headingText text-center text-md-center'>Current Campaigns</h3>
       <Col
         md={4}
         lg={4}
@@ -51,7 +53,7 @@ const CampaignList = () => {
           web3.network !== 'Rinkeby' ? 'd-none' : ''
         }`}
       >
-        <Link to='/campaigns/new'>
+        {/* <Link to='/campaigns/new'>
           <button
             type='button'
             className='btn btn-outline-primary d-md-none mb-4'
@@ -60,7 +62,7 @@ const CampaignList = () => {
             &nbsp;
             <i className='bi bi-plus-circle-fill' />
           </button>
-        </Link>
+        </Link> */}
       </Col>
       <Row className='justify-content-center'>
         <Col md={8} lg={6}>
@@ -73,7 +75,7 @@ const CampaignList = () => {
             web3.network !== 'Rinkeby' ? 'd-none' : ''
           }`}
         >
-          <Link to='/campaigns/new'>
+          {/* <Link to='/campaigns/new'>
             <button
               type='button'
               className='btn btn-outline-primary d-none d-md-inline'
@@ -82,7 +84,7 @@ const CampaignList = () => {
               &nbsp;
               <i className='bi bi-plus-circle-fill' />
             </button>
-          </Link>
+          </Link> */}
         </Col>
       </Row>
     </>
