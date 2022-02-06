@@ -23,9 +23,9 @@ const CampaignList = () => {
       return (
         <Card
           key={campaign.address}
-          style={{ marginBottom: '30px'  }}
+          style={{ marginBottom: '30px' }}
           className='text-center'
-        > 
+        >
           <Card.Header>{campaign.address}</Card.Header>
           <Card.Body>
             <h6>{campaign.description}</h6>
@@ -49,11 +49,10 @@ const CampaignList = () => {
       <Col
         md={4}
         lg={4}
-        className={`text-center text-md-end ${
-          web3.network !== 'Rinkeby' ? 'd-none' : ''
-        }`}
+        className={`text-center text-md-end ${web3.network !== 'Rinkeby' ? 'd-none' : ''
+          }`}
       >
-        {/* <Link to='/campaigns/new'>
+        <Link to='/campaigns/new'>
           <button
             type='button'
             className='btn btn-outline-primary d-md-none mb-4'
@@ -62,30 +61,13 @@ const CampaignList = () => {
             &nbsp;
             <i className='bi bi-plus-circle-fill' />
           </button>
-        </Link> */}
+        </Link>
       </Col>
       <Row className='justify-content-center'>
         <Col md={8} lg={6}>
           {campaigns ? renderCards() : renderSkeletons()}
         </Col>
-        <Col
-          md={4}
-          lg={4}
-          className={`text-center text-md-end ${
-            web3.network !== 'Rinkeby' ? 'd-none' : ''
-          }`}
-        >
-          {/* <Link to='/campaigns/new'>
-            <button
-              type='button'
-              className='btn btn-outline-primary d-none d-md-inline'
-            >
-              <span>Create Campaign</span>
-              &nbsp;
-              <i className='bi bi-plus-circle-fill' />
-            </button>
-          </Link> */}
-        </Col>
+
       </Row>
     </>
   );
